@@ -1,0 +1,3 @@
+ALTER TABLE `product`
+    DROP COLUMN `category`,
+    ADD COLUMN `category` ENUM('CLOTHING', 'ELECTRONICS', 'FOOD', 'HEALTH', 'BEAUTY') NOT NULL AFTER `price`;
