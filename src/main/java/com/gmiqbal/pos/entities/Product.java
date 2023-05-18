@@ -18,14 +18,16 @@ public class Product {
     private String name;
 
     @Column(name="code")
-    private  int code;
+    private  String code;
 
     @Column(name="price")
     private int price;
 
+    @Enumerated(EnumType.STRING)
     @Column(name="category")
     private CategoryType category;
 
+    @Enumerated(EnumType.STRING)
     @Column (name="brand")
     private BrandNames brand;
 
@@ -42,4 +44,15 @@ public class Product {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="modified_at")
     private Date modifiedAt;
+
+    @PrePersist
+    protected void onCreate(){
+        createdAt = new Date();
+        modifiedAt = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate(){
+        modifiedAt = new Date();
+    }
 }

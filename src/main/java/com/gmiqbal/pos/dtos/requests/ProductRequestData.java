@@ -7,12 +7,17 @@ import lombok.Data;
 
 @Data
 public class ProductRequestData {
-//    @NotNull
+    @NotNull
     private String name;
-    private int code;
+    @NotNull
+    private String code;
+    @NotNull
     private int price;
+    @NotNull
     private CategoryType category;
+    @NotNull
     private BrandNames brand;
+    @NotNull
     private String details;
 
 }

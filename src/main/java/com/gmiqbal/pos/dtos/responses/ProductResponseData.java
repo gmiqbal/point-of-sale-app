@@ -9,7 +9,7 @@ import java.util.Date;
 public class ProductResponseData {
     private int id;
     private String name;
-    private int code;
+    private String code;
     private int price;
     private CategoryType category;
     private BrandNames brand;

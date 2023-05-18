@@ -29,6 +29,8 @@ public class PosController{
         product.setBrand(productRequestData.getBrand());
         product.setDetails(productRequestData.getDetails());
 
+        System.out.println(product.getBrand());
+
         Product savedProduct = productRepo.save(product);
 
         ProductResponseData productResponseData = new ProductResponseData();
@@ -42,6 +44,8 @@ public class PosController{
         productResponseData.set_deleted(savedProduct.isDeleted());
         productResponseData.setCreated_at(savedProduct.getCreatedAt());
         productResponseData.setModified_at(savedProduct.getModifiedAt());
+
+        System.out.println(productResponseData.getBrand());
 
         return productResponseData;
     }
