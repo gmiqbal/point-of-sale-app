@@ -1,14 +1,14 @@
-package com.gmiqbal.pos.dtos.responses;
+package com.gmiqbal.pos.dtos.requests;
 
 import com.gmiqbal.pos.constants.BrandNames;
 import com.gmiqbal.pos.constants.CategoryType;
-import lombok.Builder;
 import lombok.Data;
 
-import java.util.Date;
+import javax.validation.constraints.NotNull;
+
 @Data
-@Builder
-public class ProductResponseData {
+public class ProductEditRequestData {
+    @NotNull
     private int id;
     private String name;
     private String code;
@@ -16,7 +16,5 @@ public class ProductResponseData {
     private CategoryType category;
     private BrandNames brand;
     private String details;
-//    private boolean isDeleted;
-//    private Date createdAt;
-//    private Date modifiedAt;
+
 }

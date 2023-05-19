@@ -21,7 +21,7 @@ public class Product {
     private  String code;
 
     @Column(name="price")
-    private int price;
+    private Integer price;
 
     @Enumerated(EnumType.STRING)
     @Column(name="category")
