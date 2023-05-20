@@ -5,6 +5,7 @@ import com.gmiqbal.pos.dtos.requests.ProductRequestData;
 import com.gmiqbal.pos.dtos.responses.ProductResponseData;
 import com.gmiqbal.pos.entities.Product;
 import com.gmiqbal.pos.repos.ProductRepo;
+import com.gmiqbal.pos.service.ProductService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,10 @@ import java.util.*;
 public class PosController{
     @Autowired
     ProductRepo productRepo;
+    @Autowired
+    ProductService productService;
+
+
     @PostMapping("")
     public ProductResponseData addProduct (@RequestBody @Valid ProductRequestData productRequestData){
         Product product = new Product();
@@ -32,18 +37,21 @@ public class PosController{
 
         Product savedProduct = productRepo.save(product);
 
-        ProductResponseData productResponseData = ProductResponseData.builder()
-            .id(savedProduct.getId())
-            .name(savedProduct.getName())
-            .code(savedProduct.getCode())
-            .price(savedProduct.getPrice())
-            .category(savedProduct.getCategory())
-            .brand(savedProduct.getBrand())
-            .details(savedProduct.getDetails())
-//            .isDeleted(savedProduct.isDeleted())
-//            .createdAt(savedProduct.getCreatedAt())
-//            .modifiedAt(savedProduct.getModifiedAt())
-                .build();
+//        ProductResponseData productResponseData = ProductResponseData.builder()
+//            .id(savedProduct.getId())
+//            .name(savedProduct.getName())
+//            .code(savedProduct.getCode())
+//            .price(savedProduct.getPrice())
+//            .category(savedProduct.getCategory())
+//            .brand(savedProduct.getBrand())
+//            .details(savedProduct.getDetails())
+////            .isDeleted(savedProduct.isDeleted())
+////            .createdAt(savedProduct.getCreatedAt())
+////            .modifiedAt(savedProduct.getModifiedAt())
+//                .build();
+
+        ProductResponseData productResponseData = productService.buildproductResponseData(savedProduct);
+
 
         System.out.println(productResponseData.getBrand());
 
@@ -56,16 +64,17 @@ public class PosController{
         List<Product> productList = productRepo.findAll();
         List<ProductResponseData> productResponseDataList = new ArrayList<>();
         for (Product savedProduct: productList) {
-            ProductResponseData productResponseData = ProductResponseData.builder()
-                    .id(savedProduct.getId())
-                    .name(savedProduct.getName())
-                    .code(savedProduct.getCode())
-                    .price(savedProduct.getPrice())
-                    .category(savedProduct.getCategory())
-                    .brand(savedProduct.getBrand())
-//                    .createdAt(savedProduct.getCreatedAt())
-//                    .modifiedAt(savedProduct.getModifiedAt())
-                    .build();
+//            ProductResponseData productResponseData = ProductResponseData.builder()
+//                    .id(savedProduct.getId())
+//                    .name(savedProduct.getName())
+//                    .code(savedProduct.getCode())
+//                    .price(savedProduct.getPrice())
+//                    .category(savedProduct.getCategory())
+//                    .brand(savedProduct.getBrand())
+////                    .createdAt(savedProduct.getCreatedAt())
+////                    .modifiedAt(savedProduct.getModifiedAt())
+//                    .build();
+            ProductResponseData productResponseData = productService.buildproductResponseData(savedProduct);
             productResponseDataList.add(productResponseData);
         }
         return productResponseDataList;
@@ -110,15 +119,17 @@ public class PosController{
 
             Product updatedProduct = productRepo.save(savedProduct);
 
-            ProductResponseData productResponseData = ProductResponseData.builder()
-                    .id(updatedProduct.getId())
-                    .name(updatedProduct.getName())
-                    .code(updatedProduct.getCode())
-                    .price(updatedProduct.getPrice())
-                    .category(updatedProduct.getCategory())
-                    .brand(updatedProduct.getBrand())
-                    .details(updatedProduct.getDetails())
-                    .build();
+            ProductResponseData productResponseData = productService.buildproductResponseData(updatedProduct);
+
+//            ProductResponseData productResponseData = ProductResponseData.builder()
+//                    .id(updatedProduct.getId())
+//                    .name(updatedProduct.getName())
+//                    .code(updatedProduct.getCode())
+//                    .price(updatedProduct.getPrice())
+//                    .category(updatedProduct.getCategory())
+//                    .brand(updatedProduct.getBrand())
+//                    .details(updatedProduct.getDetails())
+//                    .build();
             return productResponseData;
         }
     }
