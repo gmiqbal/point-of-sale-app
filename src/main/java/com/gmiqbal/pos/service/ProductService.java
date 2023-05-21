@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ProductService {
-    public ProductResponseData buildproductResponseData(Product product){
+    public ProductResponseData buildProductResponseData(Product product){
         ProductResponseData productResponseData = ProductResponseData.builder()
                 .id(product.getId())
                 .name(product.getName())

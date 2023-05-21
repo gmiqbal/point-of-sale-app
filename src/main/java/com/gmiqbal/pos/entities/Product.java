@@ -4,7 +4,6 @@ import com.gmiqbal.pos.constants.BrandNames;
 import com.gmiqbal.pos.constants.CategoryType;
 import jakarta.persistence.*;
 import lombok.Data;
-
 import java.util.Date;
 
 @Entity
@@ -44,6 +43,11 @@ public class Product {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="modified_at")
     private Date modifiedAt;
+
+    @ManyToOne
+    @JoinColumn(name = "master_category_id")
+    private MasterCategory masterCategory;
+
 
     @PrePersist
     protected void onCreate(){

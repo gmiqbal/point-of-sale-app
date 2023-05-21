@@ -2,10 +2,14 @@ package com.gmiqbal.pos.controllers;
 
 import com.gmiqbal.pos.dtos.requests.ProductEditRequestData;
 import com.gmiqbal.pos.dtos.requests.ProductRequestData;
+import com.gmiqbal.pos.dtos.responses.MasterCategoryResponse;
 import com.gmiqbal.pos.dtos.responses.ProductResponseData;
+import com.gmiqbal.pos.entities.MasterCategory;
 import com.gmiqbal.pos.entities.Product;
+import com.gmiqbal.pos.repos.MasterCategoryRepo;
 import com.gmiqbal.pos.repos.ProductRepo;
 import com.gmiqbal.pos.service.ProductService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +26,8 @@ public class PosController{
     @Autowired
     ProductService productService;
 
+    @Autowired
+    MasterCategoryRepo masterCategoryRepo;
 
     @PostMapping("")
     public ProductResponseData addProduct (@RequestBody @Valid ProductRequestData productRequestData){
@@ -32,6 +38,11 @@ public class PosController{
         product.setCategory(productRequestData.getCategory());
         product.setBrand(productRequestData.getBrand());
         product.setDetails(productRequestData.getDetails());
+
+        MasterCategory masterCategory = masterCategoryRepo.findById(
+                productRequestData.getMasterCategoryId()).orElseThrow(() -> new EntityNotFoundException("Please enter valid master category id"));
+
+        product.setMasterCategory(masterCategory);
 
         System.out.println(product.getBrand());
 
@@ -48,12 +59,9 @@ public class PosController{
 ////            .isDeleted(savedProduct.isDeleted())
 ////            .createdAt(savedProduct.getCreatedAt())
 ////            .modifiedAt(savedProduct.getModifiedAt())
-//                .build();
+//              .build();
 
-        ProductResponseData productResponseData = productService.buildproductResponseData(savedProduct);
-
-
-        System.out.println(productResponseData.getBrand());
+        ProductResponseData productResponseData = productService.buildProductResponseData(savedProduct);
 
         return productResponseData;
     }
@@ -74,10 +82,34 @@ public class PosController{
 ////                    .createdAt(savedProduct.getCreatedAt())
 ////                    .modifiedAt(savedProduct.getModifiedAt())
 //                    .build();
-            ProductResponseData productResponseData = productService.buildproductResponseData(savedProduct);
+            ProductResponseData productResponseData = productService.buildProductResponseData(savedProduct);
+
+
+
             productResponseDataList.add(productResponseData);
         }
         return productResponseDataList;
+    }
+
+    @GetMapping("/view/{id}")
+    public ProductResponseData viewSingleProduct(@PathVariable("id") int id){
+        Product savedProduct = productRepo.findById(id).orElse(null);
+        if(savedProduct == null){
+            ProductResponseData productResponseData = ProductResponseData.builder().build();
+            return productResponseData;
+        }else{
+            ProductResponseData productResponseData = productService.buildProductResponseData(savedProduct);
+
+            MasterCategory masterCategory = savedProduct.getMasterCategory();
+
+            MasterCategoryResponse masterCategoryResponse = MasterCategoryResponse.builder()
+                    .id(masterCategory.getId())
+                    .name(masterCategory.getCategoryName())
+                    .build();
+            productResponseData.setMasterCategoryResponse(masterCategoryResponse);
+
+            return productResponseData;
+        }
     }
 
     @DeleteMapping("/view/{id}")
@@ -91,7 +123,7 @@ public class PosController{
         }
     }
 
-    @PutMapping("/view/update")
+    @PutMapping("/update")
     public ProductResponseData updateProduct(@RequestBody ProductEditRequestData productEditRequestData){
         Product savedProduct = productRepo.findById(productEditRequestData.getId()).orElse(null);
         if(savedProduct==null){
@@ -119,7 +151,7 @@ public class PosController{
 
             Product updatedProduct = productRepo.save(savedProduct);
 
-            ProductResponseData productResponseData = productService.buildproductResponseData(updatedProduct);
+            ProductResponseData productResponseData = productService.buildProductResponseData(updatedProduct);
 
 //            ProductResponseData productResponseData = ProductResponseData.builder()
 //                    .id(updatedProduct.getId())

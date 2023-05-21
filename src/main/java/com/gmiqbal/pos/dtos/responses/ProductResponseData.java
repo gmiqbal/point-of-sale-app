@@ -16,6 +16,7 @@ public class ProductResponseData {
     private CategoryType category;
     private BrandNames brand;
     private String details;
+    private MasterCategoryResponse masterCategoryResponse;
 //    private boolean isDeleted;
 //    private Date createdAt;
 //    private Date modifiedAt;

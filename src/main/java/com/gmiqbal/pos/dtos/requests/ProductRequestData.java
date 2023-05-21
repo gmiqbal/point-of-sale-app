@@ -19,5 +19,7 @@ public class ProductRequestData {
     private BrandNames brand;
     @NotNull
     private String details;
+    @NotNull
+    private Integer masterCategoryId;
 
 }
