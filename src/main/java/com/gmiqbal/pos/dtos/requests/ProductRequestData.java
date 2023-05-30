@@ -5,6 +5,8 @@ import com.gmiqbal.pos.constants.CategoryType;
 import javax.validation.constraints.NotNull;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 public class ProductRequestData {
     @NotNull
@@ -12,7 +14,7 @@ public class ProductRequestData {
     @NotNull
     private String code;
     @NotNull
-    private int price;
+    private BigDecimal price;
 //    @NotNull
 //    private CategoryType category;
     @NotNull

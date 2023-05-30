@@ -1,2 +1,0 @@
-ALTER TABLE `product`
-    MODIFY COLUMN `is_deleted` BOOLEAN NOT NULL;

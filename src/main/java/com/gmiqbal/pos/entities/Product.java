@@ -7,10 +7,12 @@ import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
 @Data
+@Table(name = "product")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,12 +24,8 @@ public class Product {
     @Column(name="code")
     private  String code;
 
-    @Column(name="price")
-    private Integer price;
-
-//    @Enumerated(EnumType.STRING)
-//    @Column(name="category")
-//    private CategoryType category;
+    @Column(name = "price", precision = 10, scale = 2)
+    private BigDecimal price;
 
     @Enumerated(EnumType.STRING)
     @Column (name="brand")
@@ -55,7 +53,6 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "master_category_id")
     private MasterCategory masterCategory;
-
 
     @PrePersist
     protected void onCreate(){
