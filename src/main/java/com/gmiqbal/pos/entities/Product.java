@@ -4,6 +4,9 @@ import com.gmiqbal.pos.constants.BrandNames;
 import com.gmiqbal.pos.constants.CategoryType;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -22,9 +25,9 @@ public class Product {
     @Column(name="price")
     private Integer price;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name="category")
-    private CategoryType category;
+//    @Enumerated(EnumType.STRING)
+//    @Column(name="category")
+//    private CategoryType category;
 
     @Enumerated(EnumType.STRING)
     @Column (name="brand")
@@ -32,6 +35,11 @@ public class Product {
 
     @Column(name="details")
     private String details;
+
+    @Column(name="barcode")
+    @NotNull(message = "Barcode can not be null")
+    @NotEmpty(message = "Barcode can not be empty")
+    private String bracode;
 
     @Column(name = "is_deleted")
     private boolean isDeleted;

@@ -13,7 +13,7 @@ public class ProductEditRequestData {
     private String name;
     private String code;
     private Integer price;
-    private CategoryType category;
+//    private CategoryType category;
     private BrandNames brand;
     private String details;
 

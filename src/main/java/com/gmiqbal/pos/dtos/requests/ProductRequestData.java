@@ -13,8 +13,8 @@ public class ProductRequestData {
     private String code;
     @NotNull
     private int price;
-    @NotNull
-    private CategoryType category;
+//    @NotNull
+//    private CategoryType category;
     @NotNull
     private BrandNames brand;
     @NotNull

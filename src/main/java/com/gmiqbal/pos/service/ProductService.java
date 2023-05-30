@@ -12,7 +12,6 @@ public class ProductService {
                 .name(product.getName())
                 .code(product.getCode())
                 .price(product.getPrice())
-                .category(product.getCategory())
                 .brand(product.getBrand())
                 .details(product.getDetails())
                 .build();

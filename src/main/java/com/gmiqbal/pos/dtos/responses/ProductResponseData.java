@@ -13,11 +13,9 @@ public class ProductResponseData {
     private String name;
     private String code;
     private Integer price;
-    private CategoryType category;
+//    private CategoryType category;
     private BrandNames brand;
     private String details;
+
     private MasterCategoryResponse masterCategoryResponse;
-//    private boolean isDeleted;
-//    private Date createdAt;
-//    private Date modifiedAt;
 }

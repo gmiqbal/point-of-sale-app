@@ -25,7 +25,6 @@ public class PosController{
     ProductRepo productRepo;
     @Autowired
     ProductService productService;
-
     @Autowired
     MasterCategoryRepo masterCategoryRepo;
 
@@ -35,7 +34,7 @@ public class PosController{
         product.setName(productRequestData.getName());
         product.setCode(productRequestData.getCode());
         product.setPrice(productRequestData.getPrice());
-        product.setCategory(productRequestData.getCategory());
+//        product.setCategory(productRequestData.getCategory());
         product.setBrand(productRequestData.getBrand());
         product.setDetails(productRequestData.getDetails());
 
@@ -66,7 +65,6 @@ public class PosController{
         return productResponseData;
     }
 
-
     @GetMapping("/view")
     public List<ProductResponseData> viewProduct(){
         List<Product> productList = productRepo.findAll();
@@ -83,8 +81,6 @@ public class PosController{
 ////                    .modifiedAt(savedProduct.getModifiedAt())
 //                    .build();
             ProductResponseData productResponseData = productService.buildProductResponseData(savedProduct);
-
-
 
             productResponseDataList.add(productResponseData);
         }
@@ -139,9 +135,9 @@ public class PosController{
             if(productEditRequestData.getPrice() != null){
                 savedProduct.setPrice(productEditRequestData.getPrice());
             }
-            if(productEditRequestData.getCategory() != null){
-                savedProduct.setCategory(savedProduct.getCategory());
-            }
+//            if(productEditRequestData.getCategory() != null){
+//                savedProduct.setCategory(savedProduct.getCategory());
+//            }
             if (productEditRequestData.getBrand() != null){
                 savedProduct.setBrand(savedProduct.getBrand());
             }
