@@ -12,7 +12,7 @@ public class ProductService {
                 .name(product.getName())
                 .code(product.getCode())
                 .price(product.getPrice())
-                .brand(product.getBrand())
+                .barcode(product.getBarcode())
                 .details(product.getDetails())
                 .build();
         return productResponseData;

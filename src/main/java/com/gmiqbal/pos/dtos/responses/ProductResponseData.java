@@ -1,20 +1,18 @@
 package com.gmiqbal.pos.dtos.responses;
 
-import com.gmiqbal.pos.constants.BrandNames;
-import com.gmiqbal.pos.constants.CategoryType;
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.Date;
+import java.math.BigDecimal;
+
 @Data
 @Builder
 public class ProductResponseData {
     private int id;
     private String name;
     private String code;
-    private Integer price;
-//    private CategoryType category;
-    private BrandNames brand;
+    private BigDecimal price;
+    private String barcode;
     private String details;
 
     private MasterCategoryResponse masterCategoryResponse;

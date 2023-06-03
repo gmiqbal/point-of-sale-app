@@ -1,7 +1,5 @@
 package com.gmiqbal.pos.entities;
 
-import com.gmiqbal.pos.constants.BrandNames;
-import com.gmiqbal.pos.constants.CategoryType;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -14,6 +12,7 @@ import java.util.Date;
 @Data
 @Table(name = "product")
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -27,17 +26,13 @@ public class Product {
     @Column(name = "price", precision = 10, scale = 2)
     private BigDecimal price;
 
-    @Enumerated(EnumType.STRING)
-    @Column (name="brand")
-    private BrandNames brand;
-
     @Column(name="details")
     private String details;
 
     @Column(name="barcode")
-    @NotNull(message = "Barcode can not be null")
-    @NotEmpty(message = "Barcode can not be empty")
-    private String bracode;
+//    @NotNull(message = "Barcode can not be null")
+//    @NotEmpty(message = "Barcode can not be empty")
+    private String barcode;
 
     @Column(name = "is_deleted")
     private boolean isDeleted;
@@ -53,6 +48,10 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "master_category_id")
     private MasterCategory masterCategory;
+
+
+//    @ManyToOne
+//    private
 
     @PrePersist
     protected void onCreate(){

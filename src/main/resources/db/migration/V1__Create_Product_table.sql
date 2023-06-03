@@ -3,12 +3,10 @@ CREATE TABLE `product` (
    `name` VARCHAR(1000) NOT NULL,
    `code` VARCHAR(50) NOT NULL,
    `price` DECIMAL(10,2),
-   `brand` VARCHAR(255),
    `details` VARCHAR(3000) NOT NULL,
    `barcode` VARCHAR(255) NOT NULL,
    `is_deleted` BOOLEAN NOT NULL,
    `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
    `modified_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-   `master_category_id` INT UNSIGNED,
    PRIMARY KEY (`id`)
 );

@@ -25,9 +25,10 @@ public class Stock {
 
     @Column(name = "sale_price")
     private Double salePrice;
-
-    @ManyToOne
-    private Product product;
+//
+//    @ManyToOne
+//    @Column(name = )
+//    private Product product;
 
 //    toString
 }

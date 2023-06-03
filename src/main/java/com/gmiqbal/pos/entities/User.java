@@ -9,8 +9,9 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Set;
 
-@Entity
+//@Entity
 @Data
 public class User {
     @Id
@@ -37,6 +38,9 @@ public class User {
     @Length(min =6, message = "*Your password must have at least 6 characters")
     @NotEmpty(message = "*Please provide your password")
     private String password;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private Set<Invoice> invoice;
 
 //    private int active;
 

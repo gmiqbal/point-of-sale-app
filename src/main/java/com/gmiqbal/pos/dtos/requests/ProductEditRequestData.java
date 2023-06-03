@@ -1,7 +1,5 @@
 package com.gmiqbal.pos.dtos.requests;
 
-import com.gmiqbal.pos.constants.BrandNames;
-import com.gmiqbal.pos.constants.CategoryType;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -14,8 +12,7 @@ public class ProductEditRequestData {
     private String name;
     private String code;
     private BigDecimal price;
-//    private CategoryType category;
-    private BrandNames brand;
+    private String barcode;
     private String details;
 
 }

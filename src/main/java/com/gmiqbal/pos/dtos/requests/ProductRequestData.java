@@ -1,7 +1,5 @@
 package com.gmiqbal.pos.dtos.requests;
 
-import com.gmiqbal.pos.constants.BrandNames;
-import com.gmiqbal.pos.constants.CategoryType;
 import javax.validation.constraints.NotNull;
 import lombok.Data;
 
@@ -15,10 +13,8 @@ public class ProductRequestData {
     private String code;
     @NotNull
     private BigDecimal price;
-//    @NotNull
-//    private CategoryType category;
     @NotNull
-    private BrandNames brand;
+    private String barcode;
     @NotNull
     private String details;
     @NotNull

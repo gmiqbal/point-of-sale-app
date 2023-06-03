@@ -35,15 +35,13 @@ public class PosController{
         product.setCode(productRequestData.getCode());
         product.setPrice(productRequestData.getPrice());
 //        product.setCategory(productRequestData.getCategory());
-        product.setBrand(productRequestData.getBrand());
+        product.setBarcode(productRequestData.getBarcode());
         product.setDetails(productRequestData.getDetails());
 
         MasterCategory masterCategory = masterCategoryRepo.findById(
                 productRequestData.getMasterCategoryId()).orElseThrow(() -> new EntityNotFoundException("Please enter valid master category id"));
 
         product.setMasterCategory(masterCategory);
-
-        System.out.println(product.getBrand());
 
         Product savedProduct = productRepo.save(product);
 
@@ -138,8 +136,8 @@ public class PosController{
 //            if(productEditRequestData.getCategory() != null){
 //                savedProduct.setCategory(savedProduct.getCategory());
 //            }
-            if (productEditRequestData.getBrand() != null){
-                savedProduct.setBrand(savedProduct.getBrand());
+            if (productEditRequestData.getBarcode() != null){
+                savedProduct.setBarcode(savedProduct.getBarcode());
             }
             if(productEditRequestData.getDetails() != null){
                 savedProduct.setDetails(savedProduct.getDetails());
