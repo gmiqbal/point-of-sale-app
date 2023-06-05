@@ -18,7 +18,7 @@ import javax.validation.*;
 import java.util.*;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/product")
 @Data
 public class PosController{
     @Autowired
@@ -34,7 +34,6 @@ public class PosController{
         product.setName(productRequestData.getName());
         product.setCode(productRequestData.getCode());
         product.setPrice(productRequestData.getPrice());
-//        product.setCategory(productRequestData.getCategory());
         product.setBarcode(productRequestData.getBarcode());
         product.setDetails(productRequestData.getDetails());
 
@@ -42,7 +41,6 @@ public class PosController{
                 productRequestData.getMasterCategoryId()).orElseThrow(() -> new EntityNotFoundException("Please enter valid master category id"));
 
         product.setMasterCategory(masterCategory);
-
         Product savedProduct = productRepo.save(product);
 
 //        ProductResponseData productResponseData = ProductResponseData.builder()
@@ -59,7 +57,6 @@ public class PosController{
 //              .build();
 
         ProductResponseData productResponseData = productService.buildProductResponseData(savedProduct);
-
         return productResponseData;
     }
 
@@ -68,18 +65,7 @@ public class PosController{
         List<Product> productList = productRepo.findAll();
         List<ProductResponseData> productResponseDataList = new ArrayList<>();
         for (Product savedProduct: productList) {
-//            ProductResponseData productResponseData = ProductResponseData.builder()
-//                    .id(savedProduct.getId())
-//                    .name(savedProduct.getName())
-//                    .code(savedProduct.getCode())
-//                    .price(savedProduct.getPrice())
-//                    .category(savedProduct.getCategory())
-//                    .brand(savedProduct.getBrand())
-////                    .createdAt(savedProduct.getCreatedAt())
-////                    .modifiedAt(savedProduct.getModifiedAt())
-//                    .build();
             ProductResponseData productResponseData = productService.buildProductResponseData(savedProduct);
-
             productResponseDataList.add(productResponseData);
         }
         return productResponseDataList;
